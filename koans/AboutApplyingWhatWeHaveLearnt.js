@@ -12,9 +12,9 @@ describe("About Applying What We Have Learnt", function() {
        { name: "Taste Of Athens", ingredients: ["spinach", "kalamata olives", "sesame seeds"], containsNuts: true }
     ];
   });
-
+ var _; // globals
   /*********************************************************************************/
-
+ 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (imperative)", function () {
     var i,j,hasMushrooms, productsICanEat = [];
 
@@ -30,15 +30,34 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(productsICanEat.length).toBe(FILL_ME_IN);
+    expect(productsICanEat.length).toBe(1);
   });
 
   it("given I'm allergic to nuts and hate mushrooms, it should find a pizza I can eat (functional)", function () {
       var productsICanEat = [];
-
+     
       /* solve using filter() & all() / any() */
+      productsICanEat = products.filter(function(p) {
+        if (p.containsNuts === false) {
+            hasMushrooms = false;
+            for (j = 0; j < p.ingredients.length; j+=1) {
+               if (p.ingredients[j] === "mushrooms") {
+                  hasMushrooms = true;
+               }
+            }
+            if (!hasMushrooms) {
+             return productsICanEat.push(p);
+              
+            }
+        }
+})
 
-      expect(productsICanEat.length).toBe(FILL_ME_IN);
+   var doesContainsNuts = function(p){
+     return p.containsNuts === true;
+   };
+    
+
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
